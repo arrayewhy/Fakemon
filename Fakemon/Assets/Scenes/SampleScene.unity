@@ -146,8 +146,8 @@ PositionConstraint:
   m_GameObject: {fileID: 519420028}
   m_Enabled: 1
   m_Weight: 1
-  m_TranslationAtRest: {x: 0, y: 0, z: -10}
-  m_TranslationOffset: {x: 0, y: 0, z: -10}
+  m_TranslationAtRest: {x: 0, y: 0, z: 0}
+  m_TranslationOffset: {x: 0, y: 0, z: 0}
   m_AffectTranslationX: 1
   m_AffectTranslationY: 1
   m_AffectTranslationZ: 0
@@ -218,8 +218,10 @@ GameObject:
   m_Component:
   - component: {fileID: 861823916}
   - component: {fileID: 861823915}
-  - component: {fileID: 861823918}
+  - component: {fileID: 861823919}
+  - component: {fileID: 861823920}
   - component: {fileID: 861823917}
+  - component: {fileID: 861823918}
   m_Layer: 0
   m_Name: Bulbabro
   m_TagString: Bro
@@ -309,6 +311,34 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160376efb35d74de5b361e99361605b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &861823919
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 861823914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 742ea3751d0ad4f9b8a115024001e805, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lastGridPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  moving: 0
+  shouldMoveX: 0
+  shouldMoveY: 0
+  moveSpeed: 5
+--- !u!114 &861823920
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 861823914}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 470bfe1406dc44939b51bceca7bab64d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1155928020
 GameObject:
   m_ObjectHideFlags: 0
@@ -319,6 +349,7 @@ GameObject:
   - component: {fileID: 1155928023}
   - component: {fileID: 1155928022}
   - component: {fileID: 1155928021}
+  - component: {fileID: 1155928026}
   - component: {fileID: 1155928024}
   - component: {fileID: 1155928025}
   m_Layer: 0
@@ -336,9 +367,15 @@ MonoBehaviour:
   m_GameObject: {fileID: 1155928020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f3de43d18a75a4315aa9bb78431d0c73, type: 3}
+  m_Script: {fileID: 11500000, guid: 742ea3751d0ad4f9b8a115024001e805, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  lastGridPosition: {x: 0, y: 0}
+  targetPosition: {x: 0, y: 0}
+  moving: 0
+  shouldMoveX: 0
+  shouldMoveY: 0
+  moveSpeed: 5
 --- !u!212 &1155928022
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -421,3 +458,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 160376efb35d74de5b361e99361605b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &1155928026
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1155928020}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9b8848b211f98425198e66c714288fb0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  monMoveControl: {fileID: 861823920}
