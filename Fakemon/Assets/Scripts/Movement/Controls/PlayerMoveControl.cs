@@ -10,6 +10,10 @@ public class PlayerMoveControl : MonoBehaviour {
 
 	public MonMoveControl monMoveControl;
 
+	// Variables
+
+	int cellSize = 1;
+
 	private void Start () {
 
 		// Scripts
@@ -20,25 +24,31 @@ public class PlayerMoveControl : MonoBehaviour {
 	private void Update () {
 
 		if (GotInputX ()) {
-
+			
 			if (!move.moving) {
 
-				move.shouldMoveX = true;
+				if (!HitWall (new Vector2 (InputDirectionX (), 0))) {
+					
+					move.shouldMoveX = true;
 
-				NewTargetPositionX ();
+					NewTargetPositionX ();
 
-				ComeHereMon ();
+					ComeHereMon ();
+				}
 			}
 
 		} else if (GotInputY ()) {
 
 			if (!move.moving) {
 
-				move.shouldMoveY = true;
+				if (!HitWall (new Vector2 (0, InputDirectionY ()))) {
 
-				NewTargetPositionY ();
+					move.shouldMoveY = true;
 
-				ComeHereMon ();
+					NewTargetPositionY ();
+
+					ComeHereMon ();
+				}
 			}
 		}
 	}
@@ -78,16 +88,37 @@ public class PlayerMoveControl : MonoBehaviour {
 	#region Direction __________________________________________________________
 
 	int InputDirectionX () {
-		return Input.GetAxisRaw ("Horizontal") > 0 ? 1 : Input.GetAxisRaw ("Horizontal") < 0 ? -1 : 0;
+		return Input.GetAxisRaw ("Horizontal") > 0 ? cellSize : Input.GetAxisRaw ("Horizontal") < 0 ? -cellSize : 0;
 	}
 
 	int InputDirectionY () {
-		return Input.GetAxisRaw ("Vertical") > 0 ? 1 : Input.GetAxisRaw ("Vertical") < 0 ? -1 : 0;
+		return Input.GetAxisRaw ("Vertical") > 0 ? cellSize : Input.GetAxisRaw ("Vertical") < 0 ? -cellSize : 0;
 	}
 
 	#endregion
 
+	#region Mon Control ________________________________________________________
+
 	void ComeHereMon () {
 		monMoveControl.FollowMaster (move.lastGridPosition, GotInputX (), GotInputY ());
 	}
+
+	#endregion
+
+	#region Wall Finder ________________________________________________________
+
+	bool HitWall (Vector2 direction) {
+
+		bool hit = false;
+
+		RaycastHit2D raycastHit = Physics2D.Raycast (transform.position, direction, cellSize);
+
+		if (raycastHit) {
+			hit = raycastHit.collider.tag == "Wall" ? true : false;
+		}
+
+		return hit;
+	}
+
+	#endregion
 }
