@@ -76,11 +76,11 @@ public class PlayerMoveControl : MonoBehaviour {
 	#region Inputs _____________________________________________________________
 
 	bool GotInputX () {
-		return Input.GetAxisRaw ("Horizontal") != 0;
+		return !Mathf.Approximately (Input.GetAxisRaw ("Horizontal"), 0);
 	}
 
 	bool GotInputY () {
-		return Input.GetAxisRaw ("Vertical") != 0;
+		return !Mathf.Approximately (Input.GetAxisRaw ("Vertical"), 0);
 	}
 
 	#endregion
