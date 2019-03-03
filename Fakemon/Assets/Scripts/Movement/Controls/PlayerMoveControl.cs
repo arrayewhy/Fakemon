@@ -7,8 +7,13 @@ public class PlayerMoveControl : MonoBehaviour {
 	// Scripts
 
 	Move move;
+	FacingObject facingObject;
+	AnimatorState animatorState;
+	DoorHandler doorHandler;
 
 	public MonMoveControl monMoveControl;
+
+	Door door;
 
 	// Variables
 
@@ -19,39 +24,69 @@ public class PlayerMoveControl : MonoBehaviour {
 		// Scripts
 
 		move = GetComponent<Move> ();
+		facingObject = GetComponent<FacingObject> ();
+		animatorState = GetComponent<AnimatorState> ();
+		doorHandler = GetComponent<DoorHandler> ();
 	}
 
 	private void Update () {
 
-		if (GotInputX ()) {
-			
-			if (!move.moving) {
+		if (!Busy ()) {
 
-				if (!HitWall (new Vector2 (InputDirectionX (), 0))) {
-					
-					move.shouldMoveX = true;
+			if (GotInputX ()) {
 
-					NewTargetPositionX ();
+				if (!move.moving) {
 
-					ComeHereMon ();
+					if (FacingDoorX ()) {
+
+						CheckDoor ();
+
+					} else if (!FacingWallX ()) {
+
+						InitiateMoveX ();
+
+					}
 				}
-			}
 
-		} else if (GotInputY ()) {
+			} else if (GotInputY ()) {
 
-			if (!move.moving) {
+				if (!move.moving) {
 
-				if (!HitWall (new Vector2 (0, InputDirectionY ()))) {
+					if (FacingDoorY ()) {
 
-					move.shouldMoveY = true;
+						CheckDoor ();
 
-					NewTargetPositionY ();
+					} else if (!FacingWallY ()) {
 
-					ComeHereMon ();
+						InitiateMoveY ();
+
+					}
 				}
 			}
 		}
 	}
+
+	#region Initiate Move ______________________________________________________
+
+	void InitiateMoveX () {
+
+		move.shouldMoveX = true;
+
+		NewTargetPositionX ();
+
+		ComeHereMon ();
+	}
+
+	void InitiateMoveY () {
+
+		move.shouldMoveY = true;
+
+		NewTargetPositionY ();
+
+		ComeHereMon ();
+	}
+
+	#endregion
 
 	#region New Target Position ________________________________________________
 
@@ -105,19 +140,38 @@ public class PlayerMoveControl : MonoBehaviour {
 
 	#endregion
 
-	#region Wall Finder ________________________________________________________
+	#region Facing Wall ________________________________________________________
 
-	bool HitWall (Vector2 direction) {
+	bool FacingWallX () {
+		return facingObject.HitObjectTag (new Vector2 (InputDirectionX (), 0), cellSize) == "Wall";
+	}
 
-		bool hit = false;
+	bool FacingWallY () {
+		return facingObject.HitObjectTag (new Vector2 (0, InputDirectionY ()), cellSize) == "Wall";
+	}
 
-		RaycastHit2D raycastHit = Physics2D.Raycast (transform.position, direction, cellSize);
+	#endregion
 
-		if (raycastHit) {
-			hit = raycastHit.collider.tag == "Wall" ? true : false;
-		}
+	#region Door _______________________________________________________________
 
-		return hit;
+	bool FacingDoorX () {
+		return facingObject.HitObjectTag (new Vector2 (InputDirectionX (), 0), cellSize) == "Door";
+	}
+
+	bool FacingDoorY () {
+		return facingObject.HitObjectTag (new Vector2 (0, InputDirectionY ()), cellSize) == "Door";
+	}
+
+	void CheckDoor () {
+		doorHandler.CheckDoor ();
+	}
+
+	#endregion
+
+	#region Animator States ____________________________________________________
+
+	bool Busy () {
+		return animatorState.Busy ();
 	}
 
 	#endregion

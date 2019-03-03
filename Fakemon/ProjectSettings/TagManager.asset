@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Bro
   - Wall
+  - Door
   layers:
   - Default
   - TransparentFX
@@ -42,4 +43,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Background
+    uniqueID: 3242716977
+    locked: 0
+  - name: Midground
+    uniqueID: 3234299867
+    locked: 0
+  - name: Foreground
+    uniqueID: 3792502301
     locked: 0
