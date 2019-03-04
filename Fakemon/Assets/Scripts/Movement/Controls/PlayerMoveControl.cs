@@ -7,7 +7,7 @@ public class PlayerMoveControl : MonoBehaviour {
 	// Scripts
 
 	Move move;
-	FacingObject facingObject;
+	ObstacleFinder obstacleFinder;
 	AnimatorState animatorState;
 	DoorHandler doorHandler;
 
@@ -15,16 +15,18 @@ public class PlayerMoveControl : MonoBehaviour {
 
 	Door door;
 
-	// Variables
+	// Move Variables
 
 	int cellSize = 1;
+
+	Collider2D obstacle;
 
 	private void Start () {
 
 		// Scripts
 
 		move = GetComponent<Move> ();
-		facingObject = GetComponent<FacingObject> ();
+		obstacleFinder = GetComponent<ObstacleFinder> ();
 		animatorState = GetComponent<AnimatorState> ();
 		doorHandler = GetComponent<DoorHandler> ();
 	}
@@ -37,14 +39,18 @@ public class PlayerMoveControl : MonoBehaviour {
 
 				if (!move.moving) {
 
-					if (FacingDoorX ()) {
+					RecordObstacleX ();
 
-						CheckDoor ();
+					if (obstacle) {
 
-					} else if (!FacingWallX ()) {
+						if (obstacle.tag == "Door") {
+
+							CheckDoor ();
+						}
+
+					} else {
 
 						InitiateMoveX ();
-
 					}
 				}
 
@@ -52,14 +58,18 @@ public class PlayerMoveControl : MonoBehaviour {
 
 				if (!move.moving) {
 
-					if (FacingDoorY ()) {
+					RecordObstacleY ();
 
-						CheckDoor ();
+					if (obstacle) {
 
-					} else if (!FacingWallY ()) {
+						if (obstacle.tag == "Door") {
+
+							CheckDoor ();
+						}
+
+					} else {
 
 						InitiateMoveY ();
-
 					}
 				}
 			}
@@ -140,30 +150,22 @@ public class PlayerMoveControl : MonoBehaviour {
 
 	#endregion
 
-	#region Facing Wall ________________________________________________________
+	#region Record Obstacle ____________________________________________________
 
-	bool FacingWallX () {
-		return facingObject.HitObjectTag (new Vector2 (InputDirectionX (), 0), cellSize) == "Wall";
+	void RecordObstacleX () {
+		obstacle = obstacleFinder.FindObstacle (new Vector2 (InputDirectionX (), 0), cellSize);
 	}
 
-	bool FacingWallY () {
-		return facingObject.HitObjectTag (new Vector2 (0, InputDirectionY ()), cellSize) == "Wall";
+	void RecordObstacleY () {
+		obstacle = obstacleFinder.FindObstacle (new Vector2 (0, InputDirectionY ()), cellSize);
 	}
 
 	#endregion
 
 	#region Door _______________________________________________________________
 
-	bool FacingDoorX () {
-		return facingObject.HitObjectTag (new Vector2 (InputDirectionX (), 0), cellSize) == "Door";
-	}
-
-	bool FacingDoorY () {
-		return facingObject.HitObjectTag (new Vector2 (0, InputDirectionY ()), cellSize) == "Door";
-	}
-
 	void CheckDoor () {
-		doorHandler.CheckDoor ();
+		doorHandler.CheckDoor (obstacle.gameObject);
 	}
 
 	#endregion

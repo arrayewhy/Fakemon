@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class DoorHandler : MonoBehaviour {
 
-	public void CheckDoor () {
-		print ("Checking Door!");
+	// Scripts
+
+	[HideInInspector]
+	public Door door;
+
+	public void CheckDoor (GameObject hitDoor) {
+
+		door = hitDoor.GetComponent<Door> ();
+
+		door.ChangeScene ();
 	}
 }

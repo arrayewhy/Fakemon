@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class SceneExit : MonoBehaviour {
 
@@ -10,11 +11,9 @@ public class SceneExit : MonoBehaviour {
 
 	// Enumerators
 
-	IEnumerator exitScene;
-
 	IEnumerator hideScene;
 
-	public IEnumerator ExitScene () {
+	public IEnumerator ChangeScene (string targetScene) {
 
 		bool exitSequenceComplete = false;
 
@@ -28,9 +27,17 @@ public class SceneExit : MonoBehaviour {
 
 			yield return hideScene;
 
+			// Load Scene
+
+			LoadScene (targetScene);
+
 			exitSequenceComplete = true;
 
 			yield return null;
 		}
+	}
+
+	void LoadScene (string targetScene) {
+		SceneManager.LoadScene (targetScene);
 	}
 }

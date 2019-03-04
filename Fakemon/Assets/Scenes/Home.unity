@@ -732,7 +732,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 1155928020}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e02912e3663eb45b3a74198b60773a44, type: 3}
+  m_Script: {fileID: 11500000, guid: 7a83fe7c7efd748f5b61b5e9598da142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!95 &1155928028
@@ -775,6 +775,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcfbbe846d3274351a84d7dd3f25acb1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  door: {fileID: 0}
 --- !u!1 &1180234708
 GameObject:
   m_ObjectHideFlags: 0
@@ -879,6 +880,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5470a94be726e4fcd9376fd47bc59a8c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  sceneExit: {fileID: 1910987567}
+  doorTo: Home
 --- !u!61 &1544380437
 BoxCollider2D:
   m_ObjectHideFlags: 0

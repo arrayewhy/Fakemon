@@ -2,12 +2,12 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FacingObject : MonoBehaviour {
+public class ObstacleFinder : MonoBehaviour {
 
-	public string HitObjectTag (Vector2 direction, int checkDistance) {
+	public Collider2D FindObstacle (Vector2 direction, int checkDistance) {
 
 		RaycastHit2D raycastHit = Physics2D.Raycast (transform.position, direction, checkDistance);
 
-		return raycastHit ? raycastHit.collider.tag : null;
+		return raycastHit ? raycastHit.collider : null;
 	}
 }
