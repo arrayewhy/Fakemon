@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Direction : MonoBehaviour {
+public class Direction : MonoBehaviour
+{
 	public bool facingRight;
 }

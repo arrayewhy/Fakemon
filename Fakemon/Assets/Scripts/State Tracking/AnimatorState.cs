@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AnimatorState : MonoBehaviour {
-
+public class AnimatorState : MonoBehaviour
+{
 	// Components
 
 	Animator animator;
@@ -12,8 +12,8 @@ public class AnimatorState : MonoBehaviour {
 
 	int busyHash = Animator.StringToHash ("Busy");
 
-	private void Start () {
-
+	private void Start ()
+	{
 		// Components
 
 		animator = GetComponent<Animator> ();
@@ -21,15 +21,18 @@ public class AnimatorState : MonoBehaviour {
 
 	#region Busy State _________________________________________________________
 
-	public bool Busy () {
+	public bool Busy ()
+	{
 		return animator.GetBool (busyHash);
 	}
 
-	public void BusyON () {
+	public void BusyON ()
+	{
 		animator.SetBool (busyHash, true);
 	}
 
-	public void BusyOFF () {
+	public void BusyOFF ()
+	{
 		animator.SetBool (busyHash, false);
 	}
 

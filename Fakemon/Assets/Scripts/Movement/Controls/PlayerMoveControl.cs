@@ -2,179 +2,220 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerMoveControl : MonoBehaviour {
+public class PlayerMoveControl : MonoBehaviour
+{
+    // Scripts
 
-	// Scripts
+    Move move;
+    ObstacleFinder obstacleFinder;
+    AnimatorState animatorState;
+    DoorHandler doorHandler;
 
-	Move move;
-	ObstacleFinder obstacleFinder;
-	AnimatorState animatorState;
-	DoorHandler doorHandler;
+    public MonMoveControl monMoveControl;
+    public SceneEntry sceneEntry;
 
-	public MonMoveControl monMoveControl;
+    // Move Variables
 
-	Door door;
+    int cellSize = 1;
 
-	// Move Variables
+    Collider2D obstacle;
 
-	int cellSize = 1;
+    // Enumerators
 
-	Collider2D obstacle;
+    IEnumerator checkMove;
 
-	private void Start () {
+    private void Start ()
+    {
+        // Scripts
 
-		// Scripts
+        move = GetComponent<Move> ();
+        obstacleFinder = GetComponent<ObstacleFinder> ();
+        animatorState = GetComponent<AnimatorState> ();
+        doorHandler = GetComponent<DoorHandler> ();
 
-		move = GetComponent<Move> ();
-		obstacleFinder = GetComponent<ObstacleFinder> ();
-		animatorState = GetComponent<AnimatorState> ();
-		doorHandler = GetComponent<DoorHandler> ();
-	}
+        #region Start Operations ...............................................
 
-	private void Update () {
+        checkMove = CheckMove ();
+        StartCoroutine (checkMove);
 
-		if (!Busy ()) {
+        #endregion
+    }
 
-			if (GotInputX ()) {
+    IEnumerator CheckMove ()
+    {
+        while (!sceneEntry.sceneReady) yield return null;
 
-				if (!move.moving) {
+        while (enabled)
+        {
+            if (!Busy ())
+            {
+                if (GotInputX ())
+                {
+                    if (!move.moving)
+                    {
+                        RecordObstacleX ();
 
-					RecordObstacleX ();
+                        if (obstacle)
+                        {
+                            if (obstacle.tag == "Door")
+                            {
+                                InitiateMoveX ();
 
-					if (obstacle) {
+                                BusyON ();
 
-						if (obstacle.tag == "Door") {
+                                while (move.moveX) yield return null;
 
-							CheckDoor ();
-						}
+                                CheckDoor ();
+                            }
+                        }
+                        else InitiateMoveX ();
+                    }
+                }
+                else if (GotInputY ())
+                {
+                    if (!move.moving)
+                    {
+                        RecordObstacleY ();
 
-					} else {
+                        if (obstacle)
+                        {
+                            if (obstacle.tag == "Door")
+                            {
+                                InitiateMoveY ();
 
-						InitiateMoveX ();
-					}
-				}
+                                BusyON ();
 
-			} else if (GotInputY ()) {
+                                while (move.moveY) yield return null;
 
-				if (!move.moving) {
+                                CheckDoor ();
+                            }
+                        }
+                        else InitiateMoveY ();
+                    }
+                }
+            }
 
-					RecordObstacleY ();
+            yield return null;
+        }
+    }
 
-					if (obstacle) {
+    #region Initiate Move ______________________________________________________
 
-						if (obstacle.tag == "Door") {
+    void InitiateMoveX ()
+    {
+        move.moveX = true;
 
-							CheckDoor ();
-						}
+        NewTargetPositionX ();
 
-					} else {
+        ComeHereMon ();
+    }
 
-						InitiateMoveY ();
-					}
-				}
-			}
-		}
-	}
+    void InitiateMoveY ()
+    {
+        move.moveY = true;
 
-	#region Initiate Move ______________________________________________________
+        NewTargetPositionY ();
 
-	void InitiateMoveX () {
+        ComeHereMon ();
+    }
 
-		move.shouldMoveX = true;
+    #endregion
 
-		NewTargetPositionX ();
+    #region New Target Position ________________________________________________
 
-		ComeHereMon ();
-	}
+    void NewTargetPositionX ()
+    {
+        move.targetPosition = GetTargetPositionX ();
+    }
 
-	void InitiateMoveY () {
+    void NewTargetPositionY ()
+    {
+        move.targetPosition = GetTargetPositionY ();
+    }
 
-		move.shouldMoveY = true;
+    Vector2 GetTargetPositionX ()
+    {
+        return new Vector2 (move.lastGridPosition.x + InputDirectionX (), move.lastGridPosition.y);
+    }
 
-		NewTargetPositionY ();
+    Vector2 GetTargetPositionY ()
+    {
+        return new Vector2 (move.lastGridPosition.x, move.lastGridPosition.y + InputDirectionY ());
+    }
 
-		ComeHereMon ();
-	}
+    #endregion
 
-	#endregion
+    #region Inputs _____________________________________________________________
 
-	#region New Target Position ________________________________________________
+    bool GotInputX ()
+    {
+        return !Mathf.Approximately (Input.GetAxisRaw ("Horizontal"), 0);
+    }
 
-	void NewTargetPositionX () {
-		move.targetPosition = GetTargetPositionX ();
-	}
+    bool GotInputY ()
+    {
+        return !Mathf.Approximately (Input.GetAxisRaw ("Vertical"), 0);
+    }
 
-	void NewTargetPositionY () {
-		move.targetPosition = GetTargetPositionY ();
-	}
+    #endregion
 
-	Vector2 GetTargetPositionX () {
-		return new Vector2 (move.lastGridPosition.x + InputDirectionX (), move.lastGridPosition.y);
-	}
+    #region Direction __________________________________________________________
 
-	Vector2 GetTargetPositionY () {
-		return new Vector2 (move.lastGridPosition.x, move.lastGridPosition.y + InputDirectionY ());
-	}
+    int InputDirectionX ()
+    {
+        return Input.GetAxisRaw ("Horizontal") > 0 ? cellSize : Input.GetAxisRaw ("Horizontal") < 0 ? -cellSize : 0;
+    }
 
-	#endregion
+    int InputDirectionY ()
+    {
+        return Input.GetAxisRaw ("Vertical") > 0 ? cellSize : Input.GetAxisRaw ("Vertical") < 0 ? -cellSize : 0;
+    }
 
-	#region Inputs _____________________________________________________________
+    #endregion
 
-	bool GotInputX () {
-		return !Mathf.Approximately (Input.GetAxisRaw ("Horizontal"), 0);
-	}
+    #region Mon Control ________________________________________________________
 
-	bool GotInputY () {
-		return !Mathf.Approximately (Input.GetAxisRaw ("Vertical"), 0);
-	}
+    void ComeHereMon ()
+    {
+        monMoveControl.FollowMaster (move.lastGridPosition, GotInputX (), GotInputY ());
+    }
 
-	#endregion
+    #endregion
 
-	#region Direction __________________________________________________________
+    #region Record Obstacle ____________________________________________________
 
-	int InputDirectionX () {
-		return Input.GetAxisRaw ("Horizontal") > 0 ? cellSize : Input.GetAxisRaw ("Horizontal") < 0 ? -cellSize : 0;
-	}
+    void RecordObstacleX ()
+    {
+        obstacle = obstacleFinder.FindObstacle (new Vector2 (InputDirectionX (), 0), cellSize);
+    }
 
-	int InputDirectionY () {
-		return Input.GetAxisRaw ("Vertical") > 0 ? cellSize : Input.GetAxisRaw ("Vertical") < 0 ? -cellSize : 0;
-	}
+    void RecordObstacleY ()
+    {
+        obstacle = obstacleFinder.FindObstacle (new Vector2 (0, InputDirectionY ()), cellSize);
+    }
 
-	#endregion
+    #endregion
 
-	#region Mon Control ________________________________________________________
+    #region Door _______________________________________________________________
 
-	void ComeHereMon () {
-		monMoveControl.FollowMaster (move.lastGridPosition, GotInputX (), GotInputY ());
-	}
+    void CheckDoor ()
+    {
+        doorHandler.CheckDoor (obstacle.gameObject);
+    }
 
-	#endregion
+    #endregion
 
-	#region Record Obstacle ____________________________________________________
+    #region Animator States ____________________________________________________
 
-	void RecordObstacleX () {
-		obstacle = obstacleFinder.FindObstacle (new Vector2 (InputDirectionX (), 0), cellSize);
-	}
+    bool Busy ()
+    {
+        return animatorState.Busy ();
+    }
 
-	void RecordObstacleY () {
-		obstacle = obstacleFinder.FindObstacle (new Vector2 (0, InputDirectionY ()), cellSize);
-	}
+    void BusyON ()
+    {
+        animatorState.BusyON ();
+    }
 
-	#endregion
-
-	#region Door _______________________________________________________________
-
-	void CheckDoor () {
-		doorHandler.CheckDoor (obstacle.gameObject);
-	}
-
-	#endregion
-
-	#region Animator States ____________________________________________________
-
-	bool Busy () {
-		return animatorState.Busy ();
-	}
-
-	#endregion
+    #endregion
 }

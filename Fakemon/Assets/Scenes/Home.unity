@@ -355,9 +355,10 @@ MonoBehaviour:
   lastGridPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   moving: 0
-  shouldMoveX: 0
-  shouldMoveY: 0
+  moveX: 0
+  moveY: 0
   moveSpeed: 5
+  positionedOnGrid: 0
 --- !u!114 &861823920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -627,9 +628,10 @@ MonoBehaviour:
   lastGridPosition: {x: 0, y: 0}
   targetPosition: {x: 0, y: 0}
   moving: 0
-  shouldMoveX: 0
-  shouldMoveY: 0
+  moveX: 0
+  moveY: 0
   moveSpeed: 5
+  positionedOnGrid: 1
 --- !u!212 &1155928022
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -724,6 +726,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   monMoveControl: {fileID: 861823920}
+  sceneEntry: {fileID: 1910987569}
 --- !u!114 &1155928027
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -939,9 +942,9 @@ SpriteRenderer:
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
   m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: -1060667429
-  m_SortingLayer: 2
-  m_SortingOrder: 0
+  m_SortingLayerID: -1052250319
+  m_SortingLayer: 1
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300004, guid: ef371a381626c40fc9bf117c4e0dda0b, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -1020,3 +1023,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spriteFade_SceneFadeHandler: {fileID: 957906002}
+  sceneReady: 0

@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Door : MonoBehaviour {
-
+public class Door : MonoBehaviour
+{
 	// Scripts
 
 	public SceneExit sceneExit;
@@ -16,8 +16,8 @@ public class Door : MonoBehaviour {
 
 	IEnumerator changeScene;
 
-	public void ChangeScene () {
-
+	public void ChangeScene ()
+	{
 		changeScene = sceneExit.ChangeScene (doorTo);
 
 		StartCoroutine (changeScene);

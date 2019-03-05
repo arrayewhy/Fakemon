@@ -2,11 +2,15 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SceneEntry : MonoBehaviour {
-
+public class SceneEntry : MonoBehaviour
+{
 	// Scripts
 
 	public SpriteFade spriteFade_SceneFadeHandler;
+
+	// Scene Entry Variables
+
+	public bool sceneReady;
 
 	// Enumerators
 
@@ -14,8 +18,8 @@ public class SceneEntry : MonoBehaviour {
 
 	IEnumerator revealScene;
 
-	private void Start () {
-
+	private void Start ()
+	{
 		#region Start Operations ...............................................
 
 		enterScene = EnterScene ();
@@ -25,12 +29,12 @@ public class SceneEntry : MonoBehaviour {
 		#endregion
 	}
 
-	IEnumerator EnterScene () {
-
+	IEnumerator EnterScene ()
+	{
 		bool entrySequenceComplete = false;
 
-		while (!entrySequenceComplete) {
-
+		while (!entrySequenceComplete)
+		{
 			// Reveal Scene
 
 			if (!spriteFade_SceneFadeHandler.spriteRenderer) yield return null;
@@ -42,5 +46,12 @@ public class SceneEntry : MonoBehaviour {
 
 			yield return null;
 		}
+
+		ReleaseScene ();
+	}
+
+	void ReleaseScene ()
+	{
+		sceneReady = true;
 	}
 }

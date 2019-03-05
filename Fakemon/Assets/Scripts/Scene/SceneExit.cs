@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class SceneExit : MonoBehaviour {
-
+public class SceneExit : MonoBehaviour
+{
 	// Scripts
 
 	public SpriteFade spriteFade_SceneFadeHandler;
@@ -13,12 +13,12 @@ public class SceneExit : MonoBehaviour {
 
 	IEnumerator hideScene;
 
-	public IEnumerator ChangeScene (string targetScene) {
-
+	public IEnumerator ChangeScene (string targetScene)
+	{
 		bool exitSequenceComplete = false;
 
-		while (!exitSequenceComplete) {
-
+		while (!exitSequenceComplete)
+		{
 			// Hide Scene
 
 			if (!spriteFade_SceneFadeHandler) yield return null;
@@ -37,7 +37,8 @@ public class SceneExit : MonoBehaviour {
 		}
 	}
 
-	void LoadScene (string targetScene) {
+	void LoadScene (string targetScene)
+	{
 		SceneManager.LoadScene (targetScene);
 	}
 }

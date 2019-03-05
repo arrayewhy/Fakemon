@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Move : MonoBehaviour {
-
+public class Move : MonoBehaviour
+{
 	// Components
 
 	Transform _transform;
@@ -13,26 +13,26 @@ public class Move : MonoBehaviour {
 	SpriteFlip spriteFlip;
 	Direction direction;
 
-	// Hooks
+	// Move Variables
 
 	[Header ("Control Hooks")]
 	[Space (10)]
 	public Vector2 lastGridPosition;
 	public Vector2 targetPosition;
-
 	public bool moving;
-
-	public bool shouldMoveX;
-	public bool shouldMoveY;
-
+	public bool moveX;
+	public bool moveY;
 	public int moveSpeed = 5;
+
+    //[HideInInspector]
+    public bool positionedOnGrid = true;
 
 	// Enumerators
 
 	IEnumerator checkMove;
 
-	private void Start () {
-
+	private void Start ()
+	{
 		// Components
 
 		_transform = transform;
@@ -52,40 +52,42 @@ public class Move : MonoBehaviour {
 		#endregion
 	}
 
-	IEnumerator CheckMove () {
-
-		while (enabled) {
-
-			if (moving) {
-
-				if (DistanceFromTargetPositionX () > 0.1f) {
-
+	IEnumerator CheckMove ()
+	{
+		while (enabled)
+		{
+			if (moving)
+			{
+				if (DistanceFromTargetPositionX () > 0.1f)
+				{
 					CheckSpriteFlip ();
 
 					_transform.Translate (MoveAmountX ());
-
-				} else if (DistanceFromTargetPositionY () > 0.1f) {
-
+				}
+				else if (DistanceFromTargetPositionY () > 0.1f)
+				{
 					_transform.Translate (MoveAmountY ());
-
-				} else {
-
+				}
+				else
+				{
 					RoundPositionToInt ();
+
+                    positionedOnGrid = true;
 
 					lastGridPosition = _transform.position;
 
-					if (shouldMoveX) shouldMoveX = false;
-					else if (shouldMoveY) shouldMoveY = false;
+                    ResetMoveFlags ();
 
 					moving = false;
 				}
-
-			} else {
-
-				if (shouldMoveX || shouldMoveY) {
-
+			}
+			else
+			{
+				if (moveX || moveY)
+				{
 					moving = true;
 
+                    positionedOnGrid = false;
 				}
 			}
 
@@ -93,37 +95,54 @@ public class Move : MonoBehaviour {
 		}
 	}
 
-	float DistanceFromTargetPositionX () {
+	float DistanceFromTargetPositionX ()
+	{
 		return Mathf.Abs (_transform.position.x - targetPosition.x);
 	}
 
-	float DistanceFromTargetPositionY () {
+	float DistanceFromTargetPositionY ()
+	{
 		return Mathf.Abs (_transform.position.y - targetPosition.y);
 	}
 
-	Vector2 MoveAmountX () {
+	Vector2 MoveAmountX ()
+	{
 		return new Vector2 (-(Mathf.Sign (lastGridPosition.x - targetPosition.x)), 0) * Time.deltaTime * moveSpeed;
 	}
 
-	Vector2 MoveAmountY () {
+	Vector2 MoveAmountY ()
+	{
 		return new Vector2 (0, -(Mathf.Sign (lastGridPosition.y - targetPosition.y))) * Time.deltaTime * moveSpeed;
 	}
 
 	#region Direction __________________________________________________________
 
-	bool MovingRight () {
+	bool MovingRight ()
+	{
 		return Mathf.Sign (-(_transform.position.x - targetPosition.x)) == 1;
 	}
 
-	bool MovingLeft () {
+	bool MovingLeft ()
+	{
 		return Mathf.Sign (-(_transform.position.x - targetPosition.x)) == -1;
 	}
 
 	#endregion
 
+    #region Reset Move Flags ___________________________________________________
+
+    void ResetMoveFlags ()
+    {
+        if (moveX) moveX = false;
+        else if (moveY) moveY = false;
+    }
+
+    #endregion
+
 	#region Round Position To Int ______________________________________________
 
-	void RoundPositionToInt () {
+	void RoundPositionToInt ()
+	{
 		_transform.position = new Vector2 (Mathf.RoundToInt (_transform.position.x), Mathf.RoundToInt (_transform.position.y));
 	}
 
@@ -131,23 +150,28 @@ public class Move : MonoBehaviour {
 
 	#region Sprite Flip ________________________________________________________
 
-	void CheckSpriteFlip () {
+	void CheckSpriteFlip ()
+	{
 		if (ShouldFlipSprite ()) FlipSprite ();
 	}
 
-	bool ShouldFlipSprite () {
+	bool ShouldFlipSprite ()
+	{
 		return ShouldFaceRight () || ShouldFaceLeft ();
 	}
 
-	bool ShouldFaceRight () {
+	bool ShouldFaceRight ()
+	{
 		return MovingRight () && !direction.facingRight;
 	}
 
-	bool ShouldFaceLeft () {
+	bool ShouldFaceLeft ()
+	{
 		return MovingLeft () && direction.facingRight;
 	}
 
-	void FlipSprite () {
+	void FlipSprite ()
+	{
 		spriteFlip.FlipSprite (_transform);
 		direction.facingRight = !direction.facingRight;
 	}
