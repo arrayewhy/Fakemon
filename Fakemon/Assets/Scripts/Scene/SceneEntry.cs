@@ -8,7 +8,7 @@ public class SceneEntry : MonoBehaviour
 
 	public SpriteFade spriteFade_SceneFadeHandler;
 
-	public Spawn spawn;
+    public SpawnPlayerAndMonOnStart spawnPlayerAndMon;
 
 	// Scene Entry Variables
 
@@ -32,9 +32,7 @@ public class SceneEntry : MonoBehaviour
 
 	IEnumerator EnterScene ()
 	{
-		bool entrySequenceComplete = false;
-
-		while (!entrySequenceComplete)
+        while (!sceneReady)
 		{
 			// Spawn Player & Mon
 
@@ -45,61 +43,19 @@ public class SceneEntry : MonoBehaviour
 			if (!spriteFade_SceneFadeHandler.spriteRenderer) yield return null;
 
 			revealScene = spriteFade_SceneFadeHandler.FadeAlphaToZero ();
-			yield return revealScene;
+            yield return revealScene;
 
-			entrySequenceComplete = true;
+            sceneReady = true;
 
 			yield return null;
 		}
-
-		ReleaseScene ();
 	}
 
 	#region Spawn Player & Mon _________________________________________________
 
 	void SpawnPlayerAndMon ()
 	{
-		SpawnPlayer ();
-		SpawnMon ();
-	}
-
-	void SpawnPlayer ()
-	{
-		spawn.SpawnPlayer (PlayerSpawnPosition ());
-	}
-
-	void SpawnMon ()
-	{
-		spawn.SpawnMon (MonSpawnPosition ());
-	}
-
-	Vector2 PlayerSpawnPosition ()
-	{
-		return DoorPosition ();
-	}
-
-	Vector2 MonSpawnPosition ()
-	{
-		return PlayerSpawnPosition ();
-	}
-
-	#endregion
-
-	#region Door _______________________________________________________________
-
-	Vector2 DoorPosition ()
-	{
-		Vector2 position = new Vector2 ();
-		return position;
-	}
-
-	#endregion
-
-	#region Entry Sequence Complete ____________________________________________
-
-	void ReleaseScene ()
-	{
-		sceneReady = true;
+        spawnPlayerAndMon.Spawn ();
 	}
 
 	#endregion

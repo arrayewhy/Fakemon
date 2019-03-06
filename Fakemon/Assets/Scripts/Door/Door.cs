@@ -8,9 +8,9 @@ public class Door : MonoBehaviour
 
 	public SceneExit sceneExit;
 
-	// Door Variables
+    // Door Variables
 
-	public string doorTo = "Home";
+    public string destination;
 
 	// Enumerators
 
@@ -18,8 +18,7 @@ public class Door : MonoBehaviour
 
 	public void ChangeScene ()
 	{
-		changeScene = sceneExit.ChangeScene (doorTo);
-
+		changeScene = sceneExit.ChangeScene (destination);
 		StartCoroutine (changeScene);
 	}
 }

@@ -43,6 +43,8 @@ public class PlayerMoveControl : MonoBehaviour
 
     IEnumerator CheckMove ()
     {
+        yield return InitializeScripts ();
+
 		while (!sceneEntry.sceneReady) yield return null;
 
 		while (enabled)
@@ -173,11 +175,16 @@ public class PlayerMoveControl : MonoBehaviour
 
     #endregion
 
-    #region Mon Control ________________________________________________________
+    #region Mon ________________________________________________________________
 
     void ComeHereMon ()
     {
         monMoveControl.FollowMaster (move.lastGridPosition, GotInputX (), GotInputY ());
+    }
+
+    string MonName ()
+    {
+        return "Bulbabro";
     }
 
     #endregion
@@ -216,6 +223,41 @@ public class PlayerMoveControl : MonoBehaviour
     {
         animatorState.BusyON ();
     }
+
+    #endregion
+
+    #region Initialization _____________________________________________________
+
+    IEnumerator InitializeScripts ()
+    {
+        InitializeSceneEntry ();
+
+        yield return InitializeMonMoveControl ();
+    }
+
+    void InitializeSceneEntry ()
+    {
+        sceneEntry = !sceneEntry ? GameObject.Find ("Scene Manager").GetComponent<SceneEntry> () : sceneEntry;
+    }
+
+    IEnumerator InitializeMonMoveControl ()
+    {
+        GameObject mon = null;
+
+        while (!monMoveControl)
+        {
+            mon = GameObject.Find (MonName ());
+
+            if (mon)
+            {
+                monMoveControl = mon.GetComponent<MonMoveControl> ();
+            }
+
+            yield return null;
+        }
+    }
+
+    // REFACTOR
 
     #endregion
 }
