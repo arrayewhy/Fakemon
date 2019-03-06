@@ -43,17 +43,17 @@ public class PlayerMoveControl : MonoBehaviour
 
     IEnumerator CheckMove ()
     {
-        while (!sceneEntry.sceneReady) yield return null;
+		while (!sceneEntry.sceneReady) yield return null;
 
-        while (enabled)
+		while (enabled)
         {
             if (!Busy ())
             {
-                if (GotInputX ())
+				if (GotInputX ())
                 {
                     if (!move.moving)
                     {
-                        RecordObstacleX ();
+                        DetectObstacleX ();
 
                         if (obstacle)
                         {
@@ -75,7 +75,7 @@ public class PlayerMoveControl : MonoBehaviour
                 {
                     if (!move.moving)
                     {
-                        RecordObstacleY ();
+                        DetectObstacleY ();
 
                         if (obstacle)
                         {
@@ -184,14 +184,14 @@ public class PlayerMoveControl : MonoBehaviour
 
     #region Record Obstacle ____________________________________________________
 
-    void RecordObstacleX ()
+    void DetectObstacleX ()
     {
-        obstacle = obstacleFinder.FindObstacle (new Vector2 (InputDirectionX (), 0), cellSize);
+        obstacle = obstacleFinder.DetectObstacle (new Vector2 (InputDirectionX (), 0), cellSize);
     }
 
-    void RecordObstacleY ()
+    void DetectObstacleY ()
     {
-        obstacle = obstacleFinder.FindObstacle (new Vector2 (0, InputDirectionY ()), cellSize);
+        obstacle = obstacleFinder.DetectObstacle (new Vector2 (0, InputDirectionY ()), cellSize);
     }
 
     #endregion

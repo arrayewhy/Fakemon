@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class ObstacleFinder : MonoBehaviour
 {
-	public Collider2D FindObstacle (Vector2 direction, int checkDistance)
+	public Collider2D DetectObstacle (Vector2 direction, int checkDistance)
 	{
 		RaycastHit2D raycastHit = Physics2D.Raycast (transform.position, direction, checkDistance);
 
