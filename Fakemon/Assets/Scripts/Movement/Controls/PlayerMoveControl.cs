@@ -47,6 +47,47 @@ public class PlayerMoveControl : MonoBehaviour
 
 		while (!sceneEntry.sceneReady) yield return null;
 
+		// REFACTOR
+
+		bool leftDoor = false;
+
+		while (!leftDoor)
+		{
+			if (!Busy ())
+			{
+				if (GotInputX ())
+				{
+					if (!move.moving)
+					{
+						DetectObstacleX ();
+
+						if (obstacle.tag != "Wall")
+						{
+							InitiateMoveX ();
+
+							leftDoor = true;
+						}
+					}
+				}
+				else if (GotInputY ())
+				{
+					if (!move.moving)
+					{
+						DetectObstacleY ();
+
+						if (obstacle.tag != "Wall")
+						{
+							InitiateMoveY ();
+
+							leftDoor = true;
+						}
+					}
+				}
+			}
+			
+			yield return null;
+		}
+
 		while (enabled)
         {
             if (!Busy ())
