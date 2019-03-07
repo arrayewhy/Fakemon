@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class PlayerMoveControl : MonoBehaviour
 {
+    // Components
+
+    Transform _transform;
+
     // Scripts
 
     Move move;
@@ -26,6 +30,10 @@ public class PlayerMoveControl : MonoBehaviour
 
     private void Start ()
     {
+        // Components
+
+        _transform = transform;
+
         // Scripts
 
         move = GetComponent<Move> ();
@@ -46,47 +54,6 @@ public class PlayerMoveControl : MonoBehaviour
         yield return InitializeScripts ();
 
 		while (!sceneEntry.sceneReady) yield return null;
-
-		// REFACTOR
-
-		bool leftDoor = false;
-
-		while (!leftDoor)
-		{
-			if (!Busy ())
-			{
-				if (GotInputX ())
-				{
-					if (!move.moving)
-					{
-						DetectObstacleX ();
-
-						if (obstacle.tag != "Wall")
-						{
-							InitiateMoveX ();
-
-							leftDoor = true;
-						}
-					}
-				}
-				else if (GotInputY ())
-				{
-					if (!move.moving)
-					{
-						DetectObstacleY ();
-
-						if (obstacle.tag != "Wall")
-						{
-							InitiateMoveY ();
-
-							leftDoor = true;
-						}
-					}
-				}
-			}
-			
-			yield return null;
-		}
 
 		while (enabled)
         {
@@ -234,12 +201,37 @@ public class PlayerMoveControl : MonoBehaviour
 
     void DetectObstacleX ()
     {
-        obstacle = obstacleFinder.DetectObstacle (new Vector2 (InputDirectionX (), 0), cellSize);
+        obstacle = obstacleFinder.DetectObstacle (DetectionOriginX (), DetectionDirectionX (), DetectionDistance ());
     }
 
     void DetectObstacleY ()
     {
-        obstacle = obstacleFinder.DetectObstacle (new Vector2 (0, InputDirectionY ()), cellSize);
+        obstacle = obstacleFinder.DetectObstacle (DetectionOriginY (), DetectionDirectionY (), DetectionDistance ());
+    }
+
+    Vector2 DetectionOriginX ()
+    {
+        return transform.position + new Vector3 (InputDirectionX () * cellSize, 0, 0);
+    }
+
+    Vector2 DetectionOriginY ()
+    {
+        return transform.position + new Vector3 (0, InputDirectionY () * cellSize, 0);
+    }
+
+    Vector2 DetectionDirectionX ()
+    {
+        return new Vector2 (InputDirectionX (), 0);
+    }
+
+    Vector2 DetectionDirectionY ()
+    {
+        return new Vector2 (0, InputDirectionY ());
+    }
+
+    int DetectionDistance ()
+    {
+        return cellSize / 2;
     }
 
     #endregion

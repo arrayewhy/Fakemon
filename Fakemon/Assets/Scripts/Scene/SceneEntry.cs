@@ -32,7 +32,7 @@ public class SceneEntry : MonoBehaviour
 
 	IEnumerator EnterScene ()
 	{
-        while (!sceneReady)
+        while (!SceneReady ())
 		{
 			// Spawn Player & Mon
 
@@ -45,9 +45,9 @@ public class SceneEntry : MonoBehaviour
 			revealScene = spriteFade_SceneFadeHandler.FadeAlphaToZero ();
             yield return revealScene;
 
-            sceneReady = true;
+            // Release Scene
 
-			yield return null;
+            ReleaseScene ();
 		}
 	}
 
@@ -59,4 +59,18 @@ public class SceneEntry : MonoBehaviour
 	}
 
 	#endregion
+
+    #region Scene Ready ________________________________________________________
+
+    bool SceneReady ()
+    {
+        return sceneReady;
+    }
+
+    void ReleaseScene ()
+    {
+        sceneReady = true;
+    }
+
+    #endregion
 }
