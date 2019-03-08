@@ -7,11 +7,7 @@ public class SceneExit : MonoBehaviour
 {
 	// Scripts
 
-	public SpriteFade spriteFade_SceneFadeHandler;
-
-	// Enumerators
-
-	IEnumerator hideScene;
+    public SceneFade sceneFade;
 
 	public IEnumerator ChangeScene (string targetScene)
 	{
@@ -19,13 +15,9 @@ public class SceneExit : MonoBehaviour
 
 		while (!exitSequenceComplete)
 		{
-			// Hide Scene
+            // Hide Scene
 
-			if (!spriteFade_SceneFadeHandler) yield return null;
-
-			hideScene = spriteFade_SceneFadeHandler.FadeAlphaToFull ();
-
-			yield return hideScene;
+            yield return sceneFade.HideScene ();
 
 			// Load Scene
 

@@ -5,6 +5,8 @@ TextureImporter:
     21300000: Brie
     21300002: Bulbabro
     21300004: Door
+    21300006: Mao
+    21300008: Alert
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -153,7 +155,7 @@ TextureImporter:
       rect:
         serializedVersion: 2
         x: 0
-        y: 464
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -164,6 +166,46 @@ TextureImporter:
       tessellationDetail: 0
       bones: []
       spriteID: e4c45eba58aea4ecfac72d7e2a1f8680
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Mao
+      rect:
+        serializedVersion: 2
+        x: 16
+        y: 496
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 7a920078b42ad436194d16aaf1f4c6ff
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Alert
+      rect:
+        serializedVersion: 2
+        x: 0
+        y: 464
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0, y: 0}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: a4db86b6ac410426cb163df40e240f26
       vertices: []
       indices: 
       edges: []

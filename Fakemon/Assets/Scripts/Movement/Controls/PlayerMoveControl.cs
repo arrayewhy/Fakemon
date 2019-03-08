@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class PlayerMoveControl : MonoBehaviour
 {
-    // Components
-
-    Transform _transform;
-
     // Scripts
 
     Move move;
@@ -30,10 +26,6 @@ public class PlayerMoveControl : MonoBehaviour
 
     private void Start ()
     {
-        // Components
-
-        _transform = transform;
-
         // Scripts
 
         move = GetComponent<Move> ();
@@ -259,7 +251,7 @@ public class PlayerMoveControl : MonoBehaviour
 
     #endregion
 
-    #region Initialization _____________________________________________________
+    #region Initialization REFACTOR ____________________________________________
 
     IEnumerator InitializeScripts ()
     {
@@ -289,8 +281,6 @@ public class PlayerMoveControl : MonoBehaviour
             yield return null;
         }
     }
-
-    // REFACTOR
 
     #endregion
 }

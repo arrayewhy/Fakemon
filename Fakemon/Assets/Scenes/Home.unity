@@ -127,7 +127,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &72111079
 MonoBehaviour:
@@ -170,7 +170,7 @@ GameObject:
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &457290652
 Transform:
@@ -297,7 +297,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &914002864
 MonoBehaviour:
@@ -335,11 +335,11 @@ GameObject:
   - component: {fileID: 957906002}
   - component: {fileID: 957906003}
   m_Layer: 0
-  m_Name: Scene Fade Handler
+  m_Name: Scene Fader
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &957906002
 MonoBehaviour:
@@ -400,7 +400,7 @@ SpriteRenderer:
   m_SortingLayer: 3
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: ea4a56aca12734e0b90f970cc2371ab5, type: 3}
-  m_Color: {r: 0, g: 0, b: 0, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -435,12 +435,12 @@ GameObject:
   - component: {fileID: 1042723760}
   - component: {fileID: 1042723759}
   - component: {fileID: 1042723758}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Colliders
   m_TagString: Wall
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1042723757
 Transform:
@@ -569,7 +569,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &1180234709
 Transform:
@@ -645,7 +645,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1530224882
 MonoBehaviour:
@@ -695,12 +695,12 @@ GameObject:
   - component: {fileID: 1544380438}
   - component: {fileID: 1544380437}
   - component: {fileID: 1544380436}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: HomeOutside
   m_TagString: Door
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1544380436
 MonoBehaviour:
@@ -813,7 +813,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1562298222
 MonoBehaviour:
@@ -856,7 +856,7 @@ GameObject:
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!114 &1910987567
 MonoBehaviour:
@@ -870,7 +870,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2b6840c92f3ab4c2e87d21ad21b701e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteFade_SceneFadeHandler: {fileID: 957906002}
+  sceneFade: {fileID: 957906003}
 --- !u!4 &1910987568
 Transform:
   m_ObjectHideFlags: 0
@@ -897,6 +897,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2fa0df5b79c5b4af2af866aba1983193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  spriteFade_SceneFadeHandler: {fileID: 957906002}
+  sceneFade: {fileID: 957906003}
   spawnPlayerAndMon: {fileID: 1530224884}
   sceneReady: 0

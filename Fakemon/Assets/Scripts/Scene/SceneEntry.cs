@@ -4,9 +4,9 @@ using UnityEngine;
 
 public class SceneEntry : MonoBehaviour
 {
-	// Scripts
+    // Scripts
 
-	public SpriteFade spriteFade_SceneFadeHandler;
+    public SceneFade sceneFade;
 
     public SpawnPlayerAndMonOnStart spawnPlayerAndMon;
 
@@ -17,8 +17,6 @@ public class SceneEntry : MonoBehaviour
 	// Enumerators
 
 	IEnumerator enterScene;
-
-	IEnumerator revealScene;
 
 	private void Start ()
 	{
@@ -38,12 +36,9 @@ public class SceneEntry : MonoBehaviour
 
 			SpawnPlayerAndMon ();
 
-			// Reveal Scene
+            // Reveal Scene
 
-			if (!spriteFade_SceneFadeHandler.spriteRenderer) yield return null;
-
-			revealScene = spriteFade_SceneFadeHandler.FadeAlphaToZero ();
-            yield return revealScene;
+            yield return sceneFade.RevealScene ();
 
             // Release Scene
 
