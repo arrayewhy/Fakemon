@@ -8,6 +8,10 @@ public class SceneFade : MonoBehaviour
 
     SpriteFade spriteFade;
 
+	// Scene Fade Variables
+
+	float fadeStepDelay = 0.1f;
+
     private void Start ()
     {
         // Scripts
@@ -19,11 +23,11 @@ public class SceneFade : MonoBehaviour
     {
         while (!spriteFade) yield return null;
 
-        yield return spriteFade.Alpha_FromFullToZero ();
+        yield return spriteFade.Alpha_FromFullToZero (fadeStepDelay);
     }
 
     public IEnumerator HideScene ()
     {
-        yield return spriteFade.Alpha_FromCurrentToFull ();
+        yield return spriteFade.Alpha_FromCurrentToFull (fadeStepDelay);
     }
 }

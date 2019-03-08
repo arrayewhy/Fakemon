@@ -10,7 +10,6 @@ public class Move : MonoBehaviour
 
 	// Scripts
 
-	SpriteFlip spriteFlip;
 	Direction direction;
 
 	// Move Variables
@@ -39,7 +38,6 @@ public class Move : MonoBehaviour
 
 		// Scripts
 
-		spriteFlip = GetComponent<SpriteFlip> ();
 		direction = GetComponent<Direction> ();
 
 		#region Start Operations ...............................................
@@ -152,7 +150,10 @@ public class Move : MonoBehaviour
 
 	void CheckSpriteFlip ()
 	{
-		if (ShouldFlipSprite ()) FlipSprite ();
+		if (ShouldFlipSprite ())
+		{
+			return;
+		}
 	}
 
 	bool ShouldFlipSprite ()
@@ -168,12 +169,6 @@ public class Move : MonoBehaviour
 	bool ShouldFaceLeft ()
 	{
 		return MovingLeft () && direction.facingRight;
-	}
-
-	void FlipSprite ()
-	{
-		spriteFlip.FlipSprite (_transform);
-		direction.facingRight = !direction.facingRight;
 	}
 
 	#endregion

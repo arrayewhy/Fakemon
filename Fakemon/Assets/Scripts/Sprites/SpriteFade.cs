@@ -13,7 +13,6 @@ public class SpriteFade : MonoBehaviour
 
 	int zeroAlpha = 0;
 	int fullAlpha = 1;
-	float stepDelay = 0.1f;
 	float changeAmount = 0.25f;
 
 	private void Start ()
@@ -25,13 +24,13 @@ public class SpriteFade : MonoBehaviour
 
 	#region From Current Alpha _________________________________________________
 
-    public IEnumerator Alpha_FromCurrentToZero ()
+    public IEnumerator Alpha_FromCurrentToZero (float slowness)
     {
         float lastChangeTime = 0;
 
         while (!Alpha_Zero ())
         {
-            if (Time.time > lastChangeTime + stepDelay)
+            if (Time.time > lastChangeTime + slowness)
             {
                 spriteRenderer.color -= new Color (0, 0, 0, changeAmount);
 
@@ -42,13 +41,13 @@ public class SpriteFade : MonoBehaviour
         }
     }
 
-    public IEnumerator Alpha_FromCurrentToFull ()
+    public IEnumerator Alpha_FromCurrentToFull (float slowness)
     {
         float lastChangeTime = 0;
 
         while (!Alpha_Full ())
         {
-            if (Time.time > lastChangeTime + stepDelay)
+            if (Time.time > lastChangeTime + slowness)
             {
                 spriteRenderer.color += new Color (0, 0, 0, changeAmount);
 
@@ -63,7 +62,7 @@ public class SpriteFade : MonoBehaviour
 
     #region From Full Alpha ____________________________________________________
 
-    public IEnumerator Alpha_FromFullToZero ()
+    public IEnumerator Alpha_FromFullToZero (float slowness)
     {
         spriteRenderer.color = new Color (spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, fullAlpha);
 
@@ -71,7 +70,7 @@ public class SpriteFade : MonoBehaviour
 
         while (!Alpha_Zero ())
         {
-            if (Time.time > lastChangeTime + stepDelay)
+            if (Time.time > lastChangeTime + slowness)
             {
                 spriteRenderer.color -= new Color (0, 0, 0, changeAmount);
 

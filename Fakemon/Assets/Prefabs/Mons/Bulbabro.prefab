@@ -23,7 +23,6 @@ GameObject:
   - component: {fileID: 114547741307905450}
   - component: {fileID: 114830685218919788}
   - component: {fileID: 114046163121788916}
-  - component: {fileID: 114950391965583930}
   m_Layer: 0
   m_Name: Bulbabro
   m_TagString: Bro
@@ -83,17 +82,6 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 470bfe1406dc44939b51bceca7bab64d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
---- !u!114 &114950391965583930
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1847423545507330}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160376efb35d74de5b361e99361605b7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!212 &212923466678737168

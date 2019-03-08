@@ -22,12 +22,12 @@ GameObject:
   - component: {fileID: 212269210775448752}
   - component: {fileID: 61982432215903400}
   - component: {fileID: 95761044668949186}
+  - component: {fileID: 50883087717750316}
   - component: {fileID: 114825505968656328}
   - component: {fileID: 114094358129606308}
   - component: {fileID: 114295433096954934}
   - component: {fileID: 114153929340962876}
   - component: {fileID: 114146600593273062}
-  - component: {fileID: 114141614086076858}
   - component: {fileID: 114893396562171034}
   m_Layer: 0
   m_Name: Brie
@@ -49,6 +49,26 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!50 &50883087717750316
+Rigidbody2D:
+  serializedVersion: 4
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1486772307957414}
+  m_BodyType: 1
+  m_Simulated: 1
+  m_UseFullKinematicContacts: 0
+  m_UseAutoMass: 0
+  m_Mass: 1
+  m_LinearDrag: 0
+  m_AngularDrag: 0.05
+  m_GravityScale: 1
+  m_Material: {fileID: 0}
+  m_Interpolate: 0
+  m_SleepingMode: 1
+  m_CollisionDetection: 0
+  m_Constraints: 4
 --- !u!61 &61982432215903400
 BoxCollider2D:
   m_ObjectHideFlags: 1
@@ -105,17 +125,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   monMoveControl: {fileID: 0}
   sceneEntry: {fileID: 0}
---- !u!114 &114141614086076858
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 100100000}
-  m_GameObject: {fileID: 1486772307957414}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 160376efb35d74de5b361e99361605b7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &114146600593273062
 MonoBehaviour:
   m_ObjectHideFlags: 1
