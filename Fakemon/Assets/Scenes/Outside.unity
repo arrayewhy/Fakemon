@@ -295,6 +295,7 @@ GameObject:
   - component: {fileID: 633335912}
   - component: {fileID: 633335913}
   - component: {fileID: 633335916}
+  - component: {fileID: 633335917}
   m_Layer: 8
   m_Name: Mao
   m_TagString: Untagged
@@ -339,6 +340,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   facingRight: 0
+  facingUp: 0
 --- !u!212 &633335914
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -408,14 +410,25 @@ MonoBehaviour:
   m_GameObject: {fileID: 633335911}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b913ec917871e45119611ed0991175de, type: 3}
+  m_Script: {fileID: 11500000, guid: 03f1b2ddf7af847578b71db1ec1ad6d3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   up: {fileID: 21300012, guid: ef371a381626c40fc9bf117c4e0dda0b, type: 3}
   down: {fileID: 21300010, guid: ef371a381626c40fc9bf117c4e0dda0b, type: 3}
   side: {fileID: 21300006, guid: ef371a381626c40fc9bf117c4e0dda0b, type: 3}
-  shouldLookSideWays: 0
-  shouldLookUp: 0
+--- !u!114 &633335917
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 633335911}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee526503e07e9422fb383b3d6b8a3199, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  lookingSideways: 1
+  shouldCycle: 1
 --- !u!1 &914002863
 GameObject:
   m_ObjectHideFlags: 0

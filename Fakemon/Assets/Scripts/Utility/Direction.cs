@@ -4,5 +4,8 @@ using UnityEngine;
 
 public class Direction : MonoBehaviour
 {
+    // Direction Variables
+
 	public bool facingRight;
+    public bool facingUp;
 }
