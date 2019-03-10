@@ -9,6 +9,11 @@ TextureImporter:
     21300008: Alert
     21300010: Mao_Down
     21300012: Mao_Up
+    21300014: Roof_Corner
+    21300016: Wall_Side
+    21300018: Wall_Corner
+    21300020: Wall_Bottom
+    21300022: Roof_Middle
   externalObjects: {}
   serializedVersion: 7
   mipmaps:
@@ -156,7 +161,7 @@ TextureImporter:
       name: Door
       rect:
         serializedVersion: 2
-        x: 0
+        x: 496
         y: 0
         width: 16
         height: 16
@@ -176,8 +181,8 @@ TextureImporter:
       name: Mao_Side
       rect:
         serializedVersion: 2
-        x: 16
-        y: 496
+        x: 0
+        y: 0
         width: 16
         height: 16
       alignment: 0
@@ -216,12 +221,12 @@ TextureImporter:
       name: Mao_Down
       rect:
         serializedVersion: 2
-        x: 32
-        y: 496
+        x: 16
+        y: 0
         width: 16
         height: 16
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -236,8 +241,108 @@ TextureImporter:
       name: Mao_Up
       rect:
         serializedVersion: 2
-        x: 48
-        y: 496
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 13da3c69c0a404497a135d39acc88189
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Roof_Corner
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 32
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 5c7852ebbfd49495ca147271945a233a
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Side
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 16
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: e0d129d43781944898b6254e876a6709
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Corner
+      rect:
+        serializedVersion: 2
+        x: 464
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: c01fe895ef904409484765cd3b7a5d40
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Wall_Bottom
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 16620e900cb1748a88dad765906e7e80
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Roof_Middle
+      rect:
+        serializedVersion: 2
+        x: 480
+        y: 32
         width: 16
         height: 16
       alignment: 0
@@ -247,7 +352,7 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 13da3c69c0a404497a135d39acc88189
+      spriteID: a9f138bf5611b468c96c6912e2a9a451
       vertices: []
       indices: 
       edges: []

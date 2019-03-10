@@ -251,7 +251,10 @@ public class PlayerMoveControl : MonoBehaviour
 
     #endregion
 
-    #region Initialization REFACTOR ____________________________________________
+    #region Initialization _____________________________________________________
+
+    // REFACTOR
+    // Consider static instancing.
 
     IEnumerator InitializeScripts ()
     {

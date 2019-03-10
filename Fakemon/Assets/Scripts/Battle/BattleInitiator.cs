@@ -4,63 +4,86 @@ using UnityEngine;
 
 public class BattleInitiator : MonoBehaviour
 {
-	// Scripts
+    // Scripts
 
-	FindObjectByTag findObjectByTag;
+    BattlerDirectionCycle battlerDirectionCycle;
+    AnimatorState animatorState;
+    BattleSceneFade battleSceneFade;
 
-	public Emotes emotes;
+    public Emotes emotes;
 
 	// Emote Variables
 
 	int flashDuration = 1;
 
-	// Enumerators
+    // Enumerators
 
-	IEnumerator standbyBattle;
+    IEnumerator initiateBattle;
+    IEnumerator battleFlash;
 
-	IEnumerator flashAlert;
+    private void Start ()
+    {
+        // Scripts
 
-	private void Start ()
+        battlerDirectionCycle = GetComponentInParent<BattlerDirectionCycle> ();
+
+        // REFACTOR
+        // Consider static instancing.
+
+        animatorState = GameObject.Find ("Brie").GetComponent<AnimatorState> ();
+
+        // REFACTOR
+        // Consider static instancing.
+
+        battleSceneFade = GameObject.Find ("Scene Fader").GetComponent<BattleSceneFade> ();
+    }
+
+    #region Battle _____________________________________________________________
+
+    IEnumerator InitiateBattle ()
 	{
-		// Scripts
+        StopDirectionCycle ();
 
-		findObjectByTag = GetComponent<FindObjectByTag> ();
+        StopPlayerMovement ();
 
-		#region Start Operations ...............................................
+        yield return emotes.FlashAlert (1);
 
-		standbyBattle = StandbyBattle ();
-		StartCoroutine (standbyBattle);
-
-		#endregion
-	}
-
-	#region Standby ____________________________________________________________
-
-	IEnumerator StandbyBattle ()
-	{
-		while (!findObjectByTag.seeTarget) yield return null;
-
-		InitiateBattle ();
-	}
-
-	#endregion
-
-	#region Battle _____________________________________________________________
-
-	void InitiateBattle ()
-	{
-		FlashAlert ();
-	}
-
-	#endregion
-
-	#region Emote ______________________________________________________________
-
-	void FlashAlert ()
-	{
-		flashAlert = emotes.FlashAlert (flashDuration);
-		StartCoroutine (flashAlert);
+        battleFlash = battleSceneFade.BattleFlash ();
+        StartCoroutine (battleFlash);
 	}
 
 	#endregion
+
+    #region Direction Cycle ____________________________________________________
+
+    void StopDirectionCycle ()
+    {
+        battlerDirectionCycle.shouldCycle = false;
+    }
+
+    #endregion
+
+    #region Player Busy ________________________________________________________
+
+    void StopPlayerMovement ()
+    {
+        animatorState.BusyON ();
+    }
+
+    #endregion
+
+    #region On Triggers ________________________________________________________
+
+    private void OnTriggerEnter2D (Collider2D collision)
+    {
+        if (collision.tag == "Player") TriggerInitiateBattle ();
+    }
+
+    #endregion
+
+    void TriggerInitiateBattle ()
+    {
+        initiateBattle = InitiateBattle ();
+        StartCoroutine (initiateBattle);
+    }
 }

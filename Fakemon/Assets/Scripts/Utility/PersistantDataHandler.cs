@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PersistantDataHandler : MonoBehaviour
 {
-    // Persistant Data Variables
+    // Scene Transition Variables
 
     public static string ActiveDoorName;
 }

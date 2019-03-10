@@ -83,6 +83,29 @@ public class SpriteFade : MonoBehaviour
 
     #endregion
 
+    #region From Zero Alpha ____________________________________________________
+
+    public IEnumerator Alpha_FromZeroToFull (float slowness)
+    {
+        spriteRenderer.color = new Color (spriteRenderer.color.r, spriteRenderer.color.g, spriteRenderer.color.b, zeroAlpha);
+
+        float lastChangeTime = 0;
+
+        while (!Alpha_Full ())
+        {
+            if (Time.time > lastChangeTime + slowness)
+            {
+                spriteRenderer.color += new Color (0, 0, 0, changeAmount);
+
+                lastChangeTime = Time.time;
+            }
+
+            yield return null;
+        }
+    }
+
+    #endregion
+
     #region Alpha Check ________________________________________________________
 
     bool Alpha_Zero ()

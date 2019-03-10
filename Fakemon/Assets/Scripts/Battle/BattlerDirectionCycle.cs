@@ -21,7 +21,7 @@ public class BattlerDirectionCycle : MonoBehaviour
     [Header ("Orientation")]
     public bool lookingSideways = true;
 
-    [Header ("Hook")]
+    [Header ("Hook:")]
     public bool shouldCycle = true;
 
     // Enumerators
