@@ -6,7 +6,7 @@ public class BattleInitiator : MonoBehaviour
 {
     // Scripts
 
-    BattlerDirectionCycle battlerDirectionCycle;
+    BattlerDirectionCycleFull battlerDirectionCycle;
     AnimatorState animatorState;
     BattleSceneFade battleSceneFade;
 
@@ -25,7 +25,7 @@ public class BattleInitiator : MonoBehaviour
     {
         // Scripts
 
-        battlerDirectionCycle = GetComponentInParent<BattlerDirectionCycle> ();
+        battlerDirectionCycle = GetComponentInParent<BattlerDirectionCycleFull> ();
 
         // REFACTOR
         // Consider static instancing.
@@ -46,7 +46,7 @@ public class BattleInitiator : MonoBehaviour
 
         StopPlayerMovement ();
 
-        yield return emotes.FlashAlert (1);
+        yield return emotes.FlashEvil (flashDuration);
 
         battleFlash = battleSceneFade.BattleFlash ();
         StartCoroutine (battleFlash);

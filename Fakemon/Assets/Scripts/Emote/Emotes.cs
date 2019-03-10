@@ -30,6 +30,15 @@ public class Emotes : MonoBehaviour
 		UnassignEmote ();
 	}
 
+    public IEnumerator FlashEvil (float duration)
+    {
+        AssignEvil ();
+
+        for (float timer = duration; timer > 0; timer -= Time.deltaTime) yield return null;
+
+        UnassignEmote ();
+    }
+
 	#endregion
 
 	#region Assign Emote _______________________________________________________
@@ -38,6 +47,11 @@ public class Emotes : MonoBehaviour
 	{
 		spriteRenderer.sprite = GetEmote ("Alert");
 	}
+
+    void AssignEvil ()
+    {
+        spriteRenderer.sprite = GetEmote ("Evil");
+    }
 
 	#endregion
 

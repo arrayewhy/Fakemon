@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BattlerDirectionCycle : MonoBehaviour
+public class BattlerDirectionCycleFull : MonoBehaviour
 {
     // Components
 
