@@ -4,10 +4,6 @@ using UnityEngine;
 
 public class BattleSceneFade : MonoBehaviour
 {
-    // Components
-
-    SpriteRenderer spriteRenderer;
-
     // Scripts
 
     SpriteFade spriteFade;
@@ -16,18 +12,15 @@ public class BattleSceneFade : MonoBehaviour
 
     float fadeStepDelay = 0.05f;
 
-    int zeroAlpha = 0;
-    int fullAlpha = 1;
-
     private void Start ()
     {
-        // Components
-
-        spriteRenderer = GetComponent<SpriteRenderer> ();
-
         // Scripts
 
         spriteFade = GetComponent<SpriteFade> ();
+
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
     }
 
     public IEnumerator BattleFlash ()

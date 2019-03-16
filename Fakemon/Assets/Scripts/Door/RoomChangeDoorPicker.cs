@@ -11,6 +11,15 @@ public class RoomChangeDoorPicker : MonoBehaviour
 
     string ActiveDoorName ()
     {
-        return PersistantDataHandler.ActiveDoorName != null ? PersistantDataHandler.ActiveDoorName : "HomeOutside";
+        return PersistantDataHandler.ActiveDoorName != null ? PersistantDataHandler.ActiveDoorName : BackUpDoor ();
     }
+
+	string BackUpDoor ()
+	{
+		string door = transform.GetChild (0).name;
+
+		Debug.LogWarning ("Default Door: " + door);
+
+		return door;
+	}
 }

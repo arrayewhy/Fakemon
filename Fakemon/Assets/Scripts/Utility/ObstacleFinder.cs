@@ -13,7 +13,11 @@ public class ObstacleFinder : MonoBehaviour
         // Layer Mask Hash
 
         layerMaskHash_Obstacle = LayerMask.GetMask ("Obstacle");
-    }
+
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
+	}
 
     public Collider2D DetectObstacle (Vector2 origin, Vector2 direction, int checkDistance)
 	{

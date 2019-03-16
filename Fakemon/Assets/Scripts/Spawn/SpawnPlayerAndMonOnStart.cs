@@ -13,23 +13,31 @@ public class SpawnPlayerAndMonOnStart : MonoBehaviour
 
     private void Start ()
     {
+		// Scripts
+
         spawn = GetComponent<Spawn> ();
-    }
+
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
+	}
 
     public void Spawn ()
     {
-        SpawnPlayer ();
-        SpawnMon ();
+		Vector2 spawnPos = SpawnPosition ();
+
+        SpawnPlayer (spawnPos);
+        SpawnMon (spawnPos);
     }
 
-    void SpawnPlayer ()
+    void SpawnPlayer (Vector2 spawnPos)
     {
-        spawn.SpawnObject (GetPlayer (), PlayerSpawnPosition (), PlayerType ());
+        spawn.SpawnObject (GetPlayer (), spawnPos, PlayerType ());
     }
 
-    void SpawnMon ()
+    void SpawnMon (Vector2 spawnPos)
     {
-        spawn.SpawnObject (GetMon (), MonSpawnPosition (), MonName ());
+        spawn.SpawnObject (GetMon (), spawnPos, MonName ());
     }
 
     #region Get Objects ________________________________________________________
@@ -48,14 +56,9 @@ public class SpawnPlayerAndMonOnStart : MonoBehaviour
 
     #region Spawn Position _____________________________________________________
 
-    Vector2 PlayerSpawnPosition ()
+    Vector2 SpawnPosition ()
     {
         return roomChangeDoorPicker.ActiveDoor ().transform.position;
-    }
-
-    Vector2 MonSpawnPosition ()
-    {
-        return PlayerSpawnPosition ();
     }
 
     #endregion

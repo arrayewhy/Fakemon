@@ -36,7 +36,11 @@ public class BattleInitiator : MonoBehaviour
         // Consider static instancing.
 
         battleSceneFade = GameObject.Find ("Scene Fader").GetComponent<BattleSceneFade> ();
-    }
+
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
+	}
 
     #region Battle _____________________________________________________________
 

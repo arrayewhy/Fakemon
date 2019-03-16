@@ -40,6 +40,10 @@ public class Move : MonoBehaviour
 
 		direction = GetComponent<Direction> ();
 
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
+
 		#region Start Operations ...............................................
 
 		checkMove = CheckMove ();

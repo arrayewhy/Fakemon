@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class SceneEntry : MonoBehaviour
 {
-    // Scripts
+	// Scripts
 
+	ComponentChecker componentChecker;
     public SceneFade sceneFade;
-
     public SpawnPlayerAndMonOnStart spawnPlayerAndMon;
 
 	// Scene Entry Variables
@@ -16,21 +16,39 @@ public class SceneEntry : MonoBehaviour
 
 	// Enumerators
 
-	IEnumerator enterScene;
+	IEnumerator loadScene;
 
 	private void Start ()
 	{
+		// Components
+
+		componentChecker = GetComponentInParent<ComponentChecker> ();
+
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
+
 		#region Start Operations ...............................................
 
-		enterScene = EnterScene ();
-		StartCoroutine (enterScene);
+		loadScene = LoadScene ();
+		StartCoroutine (loadScene);
 
 		#endregion
 	}
 
-	IEnumerator EnterScene ()
+	IEnumerator LoadScene ()
 	{
-        while (!SceneReady ())
+		// Force Scene Black
+
+		sceneFade.ForceSceneBlack ();
+
+		// Wait for Necessary Components
+
+		yield return componentChecker.CheckComponents ();
+
+		// Proceed with Scene Loading
+
+		while (!SceneReady ())
 		{
 			// Spawn Player & Mon
 

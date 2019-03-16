@@ -6,9 +6,15 @@ EditorBuildSettings:
   serializedVersion: 2
   m_Scenes:
   - enabled: 1
-    path: Assets/Scenes/Home.unity
+    path: Assets/Scenes/Inside/Home.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
-    path: Assets/Scenes/Outside.unity
+    path: Assets/Scenes/Outside/Town.unity
     guid: fc4c8d109e0dc4972ac84cde6bef370d
+  - enabled: 1
+    path: Assets/Scenes/Inside/Shop.unity
+    guid: 314a9d34d5190490393edc0986bf859b
+  - enabled: 1
+    path: Assets/Scenes/Inside/MaoHouse.unity
+    guid: c6510cdc9e4874cc8adb0198ec3ff819
   m_configObjects: {}

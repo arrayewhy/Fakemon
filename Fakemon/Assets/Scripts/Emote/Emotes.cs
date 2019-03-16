@@ -17,6 +17,10 @@ public class Emotes : MonoBehaviour
 		// Components
 
 		spriteRenderer = GetComponent<SpriteRenderer> ();
+
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
 	}
 
 	#region Flash Emote ________________________________________________________

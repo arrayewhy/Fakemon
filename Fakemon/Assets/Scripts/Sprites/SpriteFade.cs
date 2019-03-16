@@ -20,6 +20,10 @@ public class SpriteFade : MonoBehaviour
 		// Components
 
 		spriteRenderer = GetComponent<SpriteRenderer> ();
+
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
 	}
 
 	#region From Current Alpha _________________________________________________

@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class SceneFade : MonoBehaviour
 {
+	// Components
+
+	SpriteRenderer spriteRenderer;
+
     // Scripts
 
     SpriteFade spriteFade;
@@ -14,16 +18,32 @@ public class SceneFade : MonoBehaviour
 
     private void Start ()
     {
+		// Components
+
+		spriteRenderer = GetComponent<SpriteRenderer> ();
+
         // Scripts
 
         spriteFade = GetComponent<SpriteFade> ();
-    }
 
-    public IEnumerator RevealScene ()
+		// Component Checker
+
+		ComponentChecker.RecordComponent ();
+	}
+
+	// REFACTOR
+	// Consider dedicated script for this function type.
+
+	public void ForceSceneBlack ()
+	{
+		spriteRenderer.color += new Color (0, 0, 0, 1);
+	}
+
+	public IEnumerator RevealScene ()
     {
         while (!spriteFade) yield return null;
 
-        yield return spriteFade.Alpha_FromFullToZero (fadeStepDelay);
+        yield return spriteFade.Alpha_FromCurrentToZero (fadeStepDelay);
     }
 
     public IEnumerator HideScene ()

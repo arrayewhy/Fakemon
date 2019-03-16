@@ -9,12 +9,16 @@ public class SceneExit : MonoBehaviour
 
     public SceneFade sceneFade;
 
-	public IEnumerator ChangeScene (string targetScene)
+	public IEnumerator ChangeScene (string door, string targetScene)
 	{
 		bool exitSequenceComplete = false;
 
 		while (!exitSequenceComplete)
 		{
+			// Record Door Name
+
+			SetActiveDoorName (door);
+
             // Hide Scene
 
             yield return sceneFade.HideScene ();
@@ -32,5 +36,10 @@ public class SceneExit : MonoBehaviour
 	void LoadScene (string targetScene)
 	{
 		SceneManager.LoadScene (targetScene);
+	}
+
+	void SetActiveDoorName (string door)
+	{
+		PersistantDataHandler.ActiveDoorName = door;
 	}
 }

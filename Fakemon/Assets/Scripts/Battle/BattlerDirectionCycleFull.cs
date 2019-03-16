@@ -40,9 +40,13 @@ public class BattlerDirectionCycleFull : MonoBehaviour
         direction = GetComponent<Direction> ();
         finderDirection = GetComponentInChildren<FinderDirection> ();
 
-        #region Start Operations ...............................................
+		// Component Checker
 
-        cycle = Cycle ();
+		ComponentChecker.RecordComponent ();
+
+		#region Start Operations ...............................................
+
+		cycle = Cycle ();
         StartCoroutine (cycle);
 
         #endregion
