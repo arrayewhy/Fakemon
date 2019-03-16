@@ -6,7 +6,6 @@ public class SceneEntry : MonoBehaviour
 {
 	// Scripts
 
-	ComponentChecker componentChecker;
     public SceneFade sceneFade;
     public SpawnPlayerAndMonOnStart spawnPlayerAndMon;
 
@@ -20,14 +19,6 @@ public class SceneEntry : MonoBehaviour
 
 	private void Start ()
 	{
-		// Components
-
-		componentChecker = GetComponentInParent<ComponentChecker> ();
-
-		// Component Checker
-
-		ComponentChecker.RecordComponent ();
-
 		#region Start Operations ...............................................
 
 		loadScene = LoadScene ();
@@ -41,10 +32,6 @@ public class SceneEntry : MonoBehaviour
 		// Force Scene Black
 
 		sceneFade.ForceSceneBlack ();
-
-		// Wait for Necessary Components
-
-		yield return componentChecker.CheckComponents ();
 
 		// Proceed with Scene Loading
 

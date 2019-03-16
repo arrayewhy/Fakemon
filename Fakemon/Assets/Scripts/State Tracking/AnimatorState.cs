@@ -17,10 +17,6 @@ public class AnimatorState : MonoBehaviour
 		// Components
 
 		animator = GetComponent<Animator> ();
-
-		// Component Checker
-
-		ComponentChecker.RecordComponent ();
 	}
 
 	#region Busy State _________________________________________________________

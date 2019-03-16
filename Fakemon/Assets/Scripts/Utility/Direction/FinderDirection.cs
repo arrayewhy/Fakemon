@@ -17,10 +17,6 @@ public class FinderDirection : MonoBehaviour
 		// Components
 
 		_transform = transform;
-
-		// Component Checker
-
-		ComponentChecker.RecordComponent ();
 	}
 
 	#region Rotate _____________________________________________________________

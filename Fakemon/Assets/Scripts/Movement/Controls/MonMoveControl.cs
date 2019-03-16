@@ -13,10 +13,6 @@ public class MonMoveControl : MonoBehaviour
 		// Scripts
 
 		monMove = GetComponent<Move> ();
-
-		// Component Checker
-
-		ComponentChecker.RecordComponent ();
 	}
 
 	public void FollowMaster (Vector2 masterGridPos, bool moveX, bool moveY)

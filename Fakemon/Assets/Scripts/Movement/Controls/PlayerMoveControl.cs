@@ -33,10 +33,6 @@ public class PlayerMoveControl : MonoBehaviour
         animatorState = GetComponent<AnimatorState> ();
         doorHandler = GetComponent<DoorHandler> ();
 
-		// Component Checker
-
-		ComponentChecker.RecordComponent ();
-
 		#region Start Operations ...............................................
 
 		checkMove = CheckMove ();

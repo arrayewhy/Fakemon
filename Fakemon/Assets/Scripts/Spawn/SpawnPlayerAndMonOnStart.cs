@@ -16,10 +16,6 @@ public class SpawnPlayerAndMonOnStart : MonoBehaviour
 		// Scripts
 
         spawn = GetComponent<Spawn> ();
-
-		// Component Checker
-
-		ComponentChecker.RecordComponent ();
 	}
 
     public void Spawn ()

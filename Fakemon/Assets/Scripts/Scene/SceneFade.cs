@@ -25,10 +25,6 @@ public class SceneFade : MonoBehaviour
         // Scripts
 
         spriteFade = GetComponent<SpriteFade> ();
-
-		// Component Checker
-
-		ComponentChecker.RecordComponent ();
 	}
 
 	// REFACTOR

@@ -17,10 +17,6 @@ public class BattleSceneFade : MonoBehaviour
         // Scripts
 
         spriteFade = GetComponent<SpriteFade> ();
-
-		// Component Checker
-
-		ComponentChecker.RecordComponent ();
     }
 
     public IEnumerator BattleFlash ()
