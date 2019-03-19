@@ -9,10 +9,23 @@ public class DoorHandler : MonoBehaviour
 	[HideInInspector]
 	public Door door;
 
-	public void CheckDoor (GameObject hitDoor)
+    SoundBank soundBank;
+
+    private void Start ()
+    {
+        // Scripts
+
+        // REFACTOR
+
+        soundBank = GameObject.Find ("Sound Player").GetComponent<SoundBank> ();
+    }
+
+    public void CheckDoor (GameObject hitDoor)
 	{
 		door = hitDoor.GetComponent<Door> ();
 	
 		door.ChangeScene ();
+
+        soundBank.PlayDoorSound ();
 	}
 }

@@ -13,7 +13,7 @@ public class SpriteFade : MonoBehaviour
 
 	int zeroAlpha = 0;
 	int fullAlpha = 1;
-	float changeAmount = 0.25f;
+	float changeAmount = 0.5f;
 
 	private void Start ()
 	{
