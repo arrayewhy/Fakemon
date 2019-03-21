@@ -39,59 +39,44 @@ public class BattleTextPixel : MonoBehaviour
 
     IEnumerator StandbyAnimation ()
     {
-        while (enabled)
+        bool entryDone = false;
+        bool outroDone = false;
+
+        while (!entryDone)
         {
-            while (!Input.GetButtonDown ("Submit")) yield return null;
-
-            bool entryDone = false;
-            bool outroDone = false;
-
-            while (!entryDone)
+            if (Mathf.Abs (_transform.localPosition.x - startPos.x) > 0.001f)
             {
-                if (Mathf.Abs (_transform.localPosition.x - startPos.x) > 0.001f)
+                if (Mathf.Abs (_transform.localPosition.x - startPos.x) < 1f)
                 {
-                    if (Mathf.Abs (_transform.localPosition.x - startPos.x) < 1f)
-                    {
-                        if (speed > 1) speed -= 1 * Time.deltaTime;
-                    }
-
-                    _transform.localPosition = Vector2.Lerp (_transform.localPosition, startPos, Time.deltaTime * speed);
-                }
-                else
-                {
-                    _transform.localPosition = startPos;
-
-                    entryDone = true;
+                    if (speed > 1) speed -= 1 * Time.deltaTime;
                 }
 
-                yield return null;
+                _transform.localPosition = Vector2.Lerp (_transform.localPosition, startPos, Time.deltaTime * speed);
+            }
+            else
+            {
+                _transform.localPosition = startPos;
+
+                entryDone = true;
             }
 
-            for (float timer = 1; timer > 0; timer -= Time.deltaTime) yield return null;
+            yield return null;
+        }
 
-            while (!outroDone)
+        for (float timer = 1; timer > 0; timer -= Time.deltaTime) yield return null;
+
+        while (!outroDone)
+        {
+            if (Mathf.Abs (_transform.localPosition.x - outPos.x) > 0.01f)
             {
-                if (Mathf.Abs (_transform.localPosition.x - outPos.x) > 0.01f)
-                {
-                    if (speed < 5) speed += 0.1f * Time.deltaTime;
+                if (speed < 5) speed += 0.1f * Time.deltaTime;
 
-                    _transform.localPosition = Vector2.Lerp (_transform.localPosition, outPos, Time.deltaTime * speed);
-                }
-                else
-                {
-                    outroDone = true;
-                }
-
-                yield return null;
+                _transform.localPosition = Vector2.Lerp (_transform.localPosition, outPos, Time.deltaTime * speed);
             }
-
-            _transform.localPosition = new Vector2 (startPos.x - 40, startPos.y);
-
-            speed = 5;
-
-            entryDone = false;
-
-            outroDone = false;
+            else
+            {
+                outroDone = true;
+            }
 
             yield return null;
         }

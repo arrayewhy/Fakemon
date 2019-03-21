@@ -11,6 +11,7 @@ public class BattleInitiator : MonoBehaviour
     BattleSceneFade battleSceneFade;
 
     public Emotes emotes;
+    public LoadBattleScene loadBattleScene;
 
 	// Emote Variables
 
@@ -38,6 +39,21 @@ public class BattleInitiator : MonoBehaviour
         battleSceneFade = GameObject.Find ("Scene Fader").GetComponent<BattleSceneFade> ();
 	}
 
+    #region On Triggers ________________________________________________________
+
+    private void OnTriggerEnter2D (Collider2D collision)
+    {
+        if (collision.tag == "Player") TriggerInitiateBattle ();
+    }
+
+    #endregion
+
+    void TriggerInitiateBattle ()
+    {
+        initiateBattle = InitiateBattle ();
+        StartCoroutine (initiateBattle);
+    }
+
     #region Battle _____________________________________________________________
 
     IEnumerator InitiateBattle ()
@@ -48,8 +64,9 @@ public class BattleInitiator : MonoBehaviour
 
         yield return emotes.FlashEvil (flashDuration);
 
-        battleFlash = battleSceneFade.BattleFlash ();
-        StartCoroutine (battleFlash);
+        yield return battleSceneFade.BattleFlash ();
+
+        loadBattleScene.EnterBattleScene ();
 	}
 
 	#endregion
@@ -71,19 +88,4 @@ public class BattleInitiator : MonoBehaviour
     }
 
     #endregion
-
-    #region On Triggers ________________________________________________________
-
-    private void OnTriggerEnter2D (Collider2D collision)
-    {
-        if (collision.tag == "Player") TriggerInitiateBattle ();
-    }
-
-    #endregion
-
-    void TriggerInitiateBattle ()
-    {
-        initiateBattle = InitiateBattle ();
-        StartCoroutine (initiateBattle);
-    }
 }

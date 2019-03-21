@@ -11,26 +11,19 @@ public class SceneExit : MonoBehaviour
 
 	public IEnumerator ChangeScene (string door, string targetScene)
 	{
-		bool exitSequenceComplete = false;
+    	// Record Door Name
 
-		while (!exitSequenceComplete)
-		{
-			// Record Door Name
+    	SetActiveDoorName (door);
 
-			SetActiveDoorName (door);
+        // Hide Scene
 
-            // Hide Scene
+        yield return sceneFade.HideScene ();
 
-            yield return sceneFade.HideScene ();
+    	// Load Scene
 
-			// Load Scene
+    	LoadScene (targetScene);
 
-			LoadScene (targetScene);
-
-			exitSequenceComplete = true;
-
-			yield return null;
-		}
+    	yield return null;
 	}
 
 	void LoadScene (string targetScene)

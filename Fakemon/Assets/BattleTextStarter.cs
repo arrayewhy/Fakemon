@@ -6,11 +6,11 @@ public class BattleTextStarter : MonoBehaviour
 {
     // Linked Game Objects
 
-    public GameObject battler;
+    public bool showBattleText;
 
     private void Start ()
     {
-        if (battler)
+        if (showBattleText)
         {
             for (int i = 0; i < transform.childCount; i++)
             {
